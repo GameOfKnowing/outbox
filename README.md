@@ -13,7 +13,7 @@ In contrast to Twitter's official website and apps, which are designed for addic
 ## System Overview & Operation
 OutBox is composed of a 5V power supply, a Raspberry Pi 3 A+, a Logitech Quick Cam webcam, a toggle "arming" button, a momentary "shutter" button, and LEDs in a custom, laser-cut enclosure. During normal operation, the device captures a low-res photo of its interior area, compresses it into a PNG, uploads it to a remote fileserver using SCP, and then triggers a pre-configured IFTT webhook to post the image as a tweet. While all images are stored locally with unique filenames, OutBox will send them to the same location on the fileserver every time, overwriting the previous image.
 
-To take a photo, the user must place their subject inside the OutBox scanner, depress the small, metal "arming" button, and then press the large, red "shutter" button. After releaseing the shutter button, the user should wait for at least 10 seconds before removing their subject or the OutBox scanner.
+To take a photo, the user must place their subject inside the OutBox scanner, depress the small, metal "arming" button, and then press the large, red "shutter" button. After releasing the shutter button, the user should wait for 10 seconds before removing their subject or the OutBox scanner.
 
 ## Hardware Setup
 For an overview of the build process, check out my project video at [Link coming soon]
