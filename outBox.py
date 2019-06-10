@@ -100,8 +100,8 @@ def posterBoi (fName):
 #initializes GPIO
 shutLED = LED(pin="GPIO19") #LED in shutter button
 armLED = LED(pin="GPIO16") #LED in arm button
-arm = Button(pin = "GPIO26", bounce_time = 0.25)#arm button
-shutter = Button(pin = "GPIO20", bounce_time = 0.25) #shutter button
+arm = Button(pin = "GPIO20", bounce_time = 0.25)#arm button
+shutter = Button(pin = "GPIO26", bounce_time = 0.25) #shutter button
 
 arm.when_pressed = armCam
 arm.when_released = disarmCam
