@@ -18,6 +18,8 @@ To take a photo, the user must place their subject inside the OutBox scanner, de
 ## Hardware Setup
 For an overview of the build process, check out my project video at [Link coming soon]
 
+A 3D model of the enclosure and ready-to-cut illustrator files can be found [here on Thingiverse.](https://www.thingiverse.com/thing:3682624)
+
 ## Software Setup (see note below)
 To start OutBox, run "OutBox.py" or use systemd to run it automatically when your computer starts up. If you have multiple camera peripherals or any camera connection issues, you may need to modify the variable "camPort" (line 19) the the appropriate port address for the camera you would like to use. 
 
