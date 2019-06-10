@@ -7,9 +7,11 @@
 #May 20, 2019
 from gpiozero import LED, Button
 import urllib.request
+import requests
 import time
 import os
 import paramiko
+import scp
 
 #image capture parameters
 imgFormat = "png" #format for caputured images
@@ -58,11 +60,6 @@ def shutPress ():
         imgName = "./images/cap" + str(numPics) + "." + imgFormat
         #captures & saves an image using paramters specified above    
         os.system("fswebcam --device %s --no-banner --%s %d --save %s" % (camPort, imgFormat, imgComp, imgName))
-        picList = os.listdir("./images")
-        #waits for new image file to be created
-        while (numPics != len(picList)):
-            picList = os.listdir("./images")
-            time.sleep(1)
         print("going to press")    
         posterBoi(imgName)
 
@@ -76,28 +73,29 @@ def posterBoi (fName):
     if (200 == urllib.request.urlopen("http://www.twitter.com").getcode()): #checks if Twitter is up
         #reads server info from external file
         with open("secr.et", 'r') as input:
-            server = input[0]
-            user = input[1]
-            password = input[2]
-            fPath = input[3] + "image." + imgFormat
-            wHook = input[4]
-            fURL = input[5] + "image." + imgFormat
+            fLines = []
+            for line in input:
+                fLines.append(line[:-1])
+        print(fLines)
+        server = fLines[0]
+        user = fLines[1]
+        password = fLines[2]
+        fPath = fLines[3] + "image." + imgFormat
+        wHook = fLines[4]
+        fURL = fLines[5] + "image." + imgFormat
 
-        #creates ssh/scp clients for server 
-        sshCon = makeSSHClient(server, user, password)
-        scpCon = SCPClient(sshCon.get_transport())
+        #creates ssh/scp clients for server
+        sshCon = paramiko.SSHClient()
+        sshCon.load_host_keys(os.path.expanduser('~/.ssh/known_hosts'))
+        sshCon.connect(server, 22, user, password)
+        scpCon = scp.SCPClient(sshCon.get_transport())
         #scp's image to server
-        scp.put(fName, fPath)
-        
+        scpCon.put(fName, fPath)
+       
+        time.sleep(5)
+
         #send tweet with webhook
-        r = requests.post("https://maker.ifttt.com/trigger/outbox/with/key/c2EyNgpusRaaVUzjI3aQEy", data={'value1': fURL})
-
-
-#creates an SSH client        
-def makeSSHClient(server, user, password):
-        client = paramiko.SSHClient()
-        client.connect(server, 22, user, password)
-        return client
+        r = requests.post("https://maker.ifttt.com/trigger/outbox/with/key/c2EyNgpusRaaVUzjI3aQEy")
 
 #initializes GPIO
 shutLED = LED(pin="GPIO19") #LED in shutter button
