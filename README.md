@@ -8,15 +8,17 @@ OutBox is a physical scanner for Twitter users who hate Twitter. With the push o
 
 Contributing content and eyeballs to social media platforms is a necessary evil of modern life. OutBox responds to this reality by allowing users to give as little of themselves as they want to at any given time, without getting totally sucked in. 
 
-In contrast to Twitter's official website and apps, which are designed for addiction and rage, **OutBox adheres to a principle I will call "Design for Disuse (D4D)."** D4D is the idea that harmful technologies (ex social media) should protect users by *discouraging* interaction. As such, posting a photo with OutBox is inconvenient-- users must power on the device, manually arrange their subject under the camera without a viewfinder, and press a button to caputure an image. There is absolutely no feedback to the user or forced content consumption.
+In contrast to Twitter's official website and apps, which are designed for addiction and rage, **OutBox adheres to a principle I will call "Design for Disuse (D4D)."** D4D is the idea that harmful technologies (ex social media) should protect users by *discouraging* interaction. As such, posting a photo with OutBox is inconvenient-- users must power on the device, manually arrange their subject under the camera without a viewfinder, and press a button to capture an image. There is absolutely no feedback to the user or forced content consumption.
 
 ## System Overview & Operation
-OutBox is composed of a 5V power supply, a Raspberry Pi 3 A+, a Logitech Quick Cam webcam, a toggle "arming" button, a momentary "shutter" button, and LEDs in a custom, laser-cut enclosure. During normal operation, the device captures a low-res photo of its interior area, compresses it into a PNG, uploads it to a remote fileserver using SCP, and then triggers a pre-configured IFTT webhook to post the image as a tweet. While all images are stored locally with unique filenames, OutBox will send them to the same location on the fileserver every time, overwriting the previous image.
+OutBox is composed of a 5V power supply, a Raspberry Pi 3 A+, a Logitech Quick Cam webcam, a toggle "arming" button, a momentary "shutter" button, and LEDs in a custom, laser-cut enclosure. During normal operation, the device captures a low-res photo of its interior area, compresses it into a PNG, uploads it to a remote fileserver using SCP, and then triggers a pre-configured IFTTT webhook to post the image as a tweet. While all images are stored locally with unique filenames, OutBox will send them to the same location on the fileserver every time, overwriting the previous image.
 
 To take a photo, the user must place their subject inside the OutBox scanner, depress the small, metal "arming" button, and then press the large, red "shutter" button. After releasing the shutter button, the user should wait for 10 seconds before removing their subject or the OutBox scanner.
 
 ## Hardware Setup
 For an overview of the build process, check out my project video at [Link coming soon]
+
+A 3D model of the enclosure and ready-to-cut illustrator files can be found [here on Thingiverse.](https://www.thingiverse.com/thing:3682624)
 
 ## Software Setup (see note below)
 To start OutBox, run "OutBox.py" or use systemd to run it automatically when your computer starts up. If you have multiple camera peripherals or any camera connection issues, you may need to modify the variable "camPort" (line 19) the the appropriate port address for the camera you would like to use. 
