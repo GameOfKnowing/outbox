@@ -6,6 +6,7 @@
 #via IFTT. Controlled by button input.
 #May 20, 2019
 from gpiozero import LED, Button
+from time import sleep
 import urllib.request
 import requests
 import time
@@ -27,14 +28,18 @@ numPics = 0
 #arms the device
 def armCam ():
     global isArmed
-    isArmed = True;
+    isArmed = True
     print("Armed")
+    shutLED.on()
+    armLED.on()
 
 #disarms the device
 def disarmCam ():
     global isArmed
-    isArmed = False;
+    isArmed = False
     print("Disarmed")
+    shutLED.off()
+    armLED.off()
 
 #captures & posts image  on shutter press    
 def shutPress ():
@@ -47,9 +52,9 @@ def shutPress ():
     global imgFormat
     global imgComp
     global imgName
-    print(imgFormat)
+    print("Shutter pressed, may not be armed")
     if (isArmed):
-        print("shutter pressed")
+        print("shutter pressed, armed")
         #gets image count if images dir exists, else creates it
         if (os.path.isdir("./images")):
             picList = os.listdir("./images")
@@ -99,12 +104,12 @@ def posterBoi (fName):
 
 #initializes GPIO
 shutLED = LED(pin="GPIO19") #LED in shutter button
-armLED = LED(pin="GPIO16") #LED in arm button
-arm = Button(pin = "GPIO20", bounce_time = 0.25)#arm button
+armLED = LED(pin="GPIO5") #LED in arm button
+arm = Button(pin = "GPIO6", bounce_time = 0.25)#arm button
 shutter = Button(pin = "GPIO26", bounce_time = 0.25) #shutter button
 
-arm.when_pressed = armCam
-arm.when_released = disarmCam
+arm.when_pressed = disarmCam
+arm.when_released = armCam
 shutter.when_pressed = shutPress
 
 
