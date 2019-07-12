@@ -16,7 +16,7 @@ OutBox is composed of a 5V power supply, a Raspberry Pi 3 A+, a Logitech Quick C
 To take a photo, the user must place their subject inside the OutBox scanner, depress the small, metal "arming" button, and then press the large, red "shutter" button. After releasing the shutter button, the user should wait for 10 seconds before removing their subject or the OutBox scanner.
 
 ## Hardware Setup
-For an overview of the build process, check out my project video at [Link coming soon]
+For an overview of the build process, check out my project video [on Diode Zone](https://diode.zone/videos/watch/d796ccb0-caa2-42ed-9086-9e569a3596d8)
 
 A 3D model of the enclosure and ready-to-cut illustrator files can be found [here on Thingiverse.](https://www.thingiverse.com/thing:3682624)
 
